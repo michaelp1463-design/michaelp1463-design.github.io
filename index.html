@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Julissa!</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f7f3e9 0%, #e6d7b8 100%);
+            color: #3d3522;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        .container {
+            width: 100%;
+            max-width: 750px;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(180, 140, 75, 0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            border: 1px solid #d4af37;
+        }
+        /* Pantalla de Bienvenida */
+        #welcomeScreen {
+            padding: 60px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #fefcf5 0%, #f7f0df 100%);
+        }
+        .birthday-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-15px);}
+            60% {transform: translateY(-7px);}
+        }
+        h1 {
+            font-size: 38px;
+            color: #8c6d23;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        .subtitle {
+            font-size: 18px;
+            color: #6b5218;
+            margin-bottom: 35px;
+        }
+        .btn-start {
+            background-color: #b8923a;
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(184, 146, 58, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-start:hover {
+            background-color: #96742a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(184, 146, 58, 0.6);
+        }
+
+        /* Pantalla del Test */
+        #quizScreen {
+            display: none;
+            padding: 40px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .quiz-title {
+            text-align: center;
+            color: #7a5e1c;
+            margin-bottom: 30px;
+            font-size: 26px;
+            border-bottom: 2px solid #eedda9;
+            padding-bottom: 15px;
+        }
+        .question-card {
+            background: #fffdf9;
+            border: 1px solid #e2cb8f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .question-title {
+            font-weight: 700;
+            color: #6b5218;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        .question-card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #4a4231;
+            margin-bottom: 12px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid #c9b482;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-top: 8px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        input[type="text"]:focus {
+            border-color: #b8923a;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #3b7a57;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: #2c5e42;
+        }
+
+        /* Pantalla de Resultados */
+        #resultScreen {
+            display: none;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .result-title {
+            font-size: 30px;
+            color: #3b7a57;
+            margin-bottom: 15px;
+        }
+        .instruction-text {
+            font-size: 15px;
+            color: #5c5038;
+            margin: 20px 0;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .review-list {
+            text-align: left;
+            background: #fcf9f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid #e8dbba;
+        }
+        .review-item {
+            margin-bottom: 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #e2d3b0;
+            padding-bottom: 10px;
+        }
+        .btn-final {
+            background: linear-gradient(135deg, #c4a14d 0%, #96742a 100%);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(150, 116, 42, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+        .btn-final:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(150, 116, 42, 0.6);
+        }
+
+        /* Pantalla Final */
+        #finalScreen {
+            display: none;
+            padding: 60px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #fefcf5 0%, #f3e5c8 100%);
+            position: relative;
+        }
+        .flowers-header {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+        .final-message {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #5a461b;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        /* Animación de Flores Contínuas a los Costados */
+        .falling-flower {
+            position: fixed;
+            top: -10%;
+            z-index: 1;
+            user-select: none;
+            cursor: default;
+            animation: fall 5s linear infinite;
+            font-size: 24px;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Pantalla 1: Sorpresa -->
+        <div id="welcomeScreen">
+            <div class="birthday-icon">🌸🎂💐</div>
+            <h1>¡Feliz Cumpleaños Julissa!</h1>
+            <p class="subtitle">Te he preparado una sorpresa, espero que te guste.</p>
+            <button class="btn-start" onclick="iniciarSorpresa()">COMENZAR LA SORPRESA</button>
+        </div>
+
+        <!-- Pantalla 2: Test -->
+        <div id="quizScreen">
+            <h2 class="quiz-title">Examen Dogmático y Dogmática Jurídica Avanzada</h2>
+            <form id="sorpresaForm">
+                
+                <div class="question-card">
+                    <div class="question-title">Pregunta 1. Hermenéutica y Símbolos en el Neoconstitucionalismo</div>
+                    <p>En el marco de la teoría de la argumentación jurídica contemporánea, ciertos dogmas normativos se encubren bajo iconos populares de la cultura de masas. Analice la doctrina comparada sobre la obligatoriedad de los atributos estéticos en la hermenéutica judicial y señale cuál es el sujeto arquetípico que, según la jurisprudencia de los tribunales supremos, ostenta un tocado infaltable en su ejercicio hermenéutico.</p>
+                    <input type="text" name="q1" placeholder="Escribe tu respuesta jurídica..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 2. Derecho Canónico e Historia del Derecho Patrimonial</div>
+                    <p>Durante la Alta Edad Media, las transacciones jurídicas de contenido alimentario y contractual dentro de los feudos eclesiásticos exigían fórmulas rituales estrictas. Considerando el Corpus Iuris Canonicum, indique la transcripción exacta del párrafo histórico-contractual sobre la ingesta avícola y la complacencia contractual que vinculaba a las partes bajo juramento solemne.</p>
+                    <input type="text" name="q2" placeholder="Escribe la máxima contractual..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 3. Lógica Deóntica y Reiteración Normativa</div>
+                    <p>Desde la perspectiva de la lógica de las normas y la subsunción formal de enunciados repetitivos, cuando un sistema jurídico experimenta un bucle de imperativos sin variación semántica ni modificación teleológica, ¿cómo se formaliza la incesante iteración sintáctica dentro de la matriz deóntica?</p>
+                    <input type="text" name="q3" placeholder="Escribe la formalización lógica..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 4. Derecho de Obligaciones y Rituales Sinalagmáticos</div>
+                    <p>En los contratos con prestaciones recíprocas de tracto sucesivo y folklore urbano, las partes suelen exteriorizar el consentimiento mediante coreografías bilaterales obligatorias. Complete el canon dogmático del sinalagma perfecto popular: «CHOCO CHOCO...»</p>
+                    <input type="text" name="q4" placeholder="Escribe el canon dogmático..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 5. Contratación Electrónica Internacional y Ciberdelitos</div>
+                    <p>En el ámbito del derecho informático y las obligaciones transfronterizas de índole sentimental, las notificaciones de incumplimiento de deberes conyugales o afectivos adquieren matices coercitivos particulares según la lex mercatoria digital. Cite textualmente el fragmento de la directiva sudamericana sobre el aviso previo de advertencia:</p>
+                    <input type="text" name="q5" placeholder="Escribe la directiva completa..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 6. Lagunas del Derecho y Aporías Procesales</div>
+                    <p>Ante una laguna legal insondable donde la subsunción normativa resulta lógicamente imposible debido a la indeterminación semántica absoluta del texto legislativo, ¿cuál es la respuesta dogmática procesal estándar que emite el operador jurídico cuando se le exige subsunción bajo incertidumbre?</p>
+                    <input type="text" name="q6" placeholder="Escribe la aporía procesal..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 7. Medicina Legal y Derecho de Daños (Responsabilidad Médica)</div>
+                    <p>Dentro de la patología forense y el estudio de las malformaciones congénitas craneofaciales con implicancias en la capacidad jurídica y la responsabilidad civil por daños prenatales, identifique la nomenclatura médica exacta y exhaustiva de la disostosis mandibulofacial:</p>
+                    <input type="text" name="q7" placeholder="Escribe el nombre completo del síndrome..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 8. Derecho Internacional Humanitario y Teoría de la Hegemonía Bélica</div>
+                    <p>En el análisis crítico de la distribución global del <em>jus ad bellum</em> y la desproporción de poderes fácticos entre titanes geopolíticos e identidades animadas de la cultura infantil universal, plantee la cuestión prejudicial sobre la supremacía estratégica en el conflicto universal. Explique como preparar un lomo saltado albino.</p>
+                    <input type="text" name="q8" placeholder="Escribe la cuestión prejudicial..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 9. Toxicología Forense y Práctica Pericial Biológica</div>
+                    <p>En un litigio de índole médico-legal sobre la acreditación de la prueba científica de patologías infectocontagiosas pulmonares en sede penal, el perito del Instituto de Medicina Legal emite un dictamen complejo sobre los medios de cultivo selectivos. Transcriba íntegramente la pericia técnica oficial contenida en el folio correspondiente. Envie una grabacion en la cual debe viajar a la luna y encontrar extraterrestres.</p>
+                    <input type="text" name="q9" placeholder="Escribe el dictamen pericial completo..." autocomplete="off">
+                </div>
+
+                <div class="question-card">
+                    <div class="question-title">Pregunta 10. Derecho Procesal Constitucional y Nulidad de Actos Procesales</div>
+                    <p>En los procesos de impugnación de fallos de tribunales de talento y concurso televisivo, la preclusión procesal y la indefensión provocan catástrofes jurídicas irreparables. Transcriba la exclamación de agravios que formula el letrado defensor tras la exclusión arbitraria del máximo exponente de la canción criolla en el plenario. Cual es mi color favorito?</p>
+                    <input type="text" name="q10" placeholder="Escribe la exclamación de agravios..." autocomplete="off">
+                </div>
+
+                <button type="button" class="btn-submit" onclick="evaluarTest()">Enviar Respuestas y Calificar</button>
+            </form>
+        </div>
+
+        <!-- Pantalla 3: Resultados -->
+        <div id="resultScreen">
+            <h2 class="result-title">¡Examen Concluido con Éxito!</h2>
+
+            <p class="instruction-text">Una vez leídas todas las respuestas, se le agradecería presionar el botón de abajo para continuar.</p>
+
+            <div class="review-list" id="reviewContainer"></div>
+            
+            <button class="btn-final" onclick="mostrarPresentacionFinal()">PRESENTACIÓN FINAL</button>
+        </div>
+
+        <!-- Pantalla 4: Presentación Final -->
+        <div id="finalScreen">
+            <div class="flowers-header">🌸🌻🌺🌷🌹💐</div>
+            <div class="final-message">
+                <p>Bueno, cada año que pasa es una meta más cumplida, un obstáculo más que saltaste, un nuevo desafío impuesto, un nuevo sueño, pero sobre todo, un año lleno de nuevos recuerdos.</p><br>
+                <p>Lo que importa es saber que estás siguiendo un camino, que cada día que pasa te sientas feliz y cómoda con lo que haces, y que las malas experiencias no te definan, sino que sirvan de impulso para que sigas esforzándote y sigas creyendo en ti misma y de lo que eres capaz.</p><br>
+                <p>Espero que siempre te lleguen las mejores cosas y que llegues tan alto como te lo propongas.</p><br>
+                <p><strong>¡Un fuerte abrazo!</strong></p>
+            </div>
+            <a href="https://www.youtube.com/watch?v=nugrbr8dvvk&list=RDnugrbr8dvvk&start_radio=1" target="_blank" class="btn-start">Escuchar canción / Volver a empezar</a>
+        </div>
+    </div>
+
+    <script>
+        let flowerInterval;
+
+        function iniciarSorpresa() {
+            document.getElementById('welcomeScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+        }
+
+        function evaluarTest() {
+            const correctas = {
+                1: "pikachu con gorrita",
+                2: "hieri comedi pullum et valde mihi placuit; locum illum vehementer commendo.",
+                3: "ur ur ur ur ur ur ur ur",
+                4: "choco choco la la choco choco le le",
+                5: "chora, me liga meu bem eu te avisei meu bem eu te avisei",
+                6: "no se p",
+                7: "síndrome de berry-treacher collins-franceschetti-zwahlen-klein",
+                8: "pocoyo le ganaria a thanos?",
+                9: "el agar ogawa es un medio de cultivo utilizado principalmente para el aislamiento y crecimiento de mycobacterium tuberculosis, agente causal de la tuberculosis. es un medio sólido que permite el desarrollo de las micobacterias a partir de muestras clínicas, facilitando su posterior identificación.",
+                10: "eliminaron a sandro de yo soy noooooo"
+            };
+
+            let aciertos = 0;
+            let detalleHTML = "";
+
+            for (let i = 1; i <= 10; i++) {
+                const inputVal = document.querySelector(`input[name="q${i}"]`).value.trim().toLowerCase();
+                const limpioInput = inputVal.replace(/\s+/g, ' ');
+                const limpioOriginal = correctas[i].toLowerCase().replace(/\s+/g, ' ');
+
+                if (limpioInput.includes(limpioOriginal) || (limpioOriginal.includes(limpioInput) && limpioInput.length > 2)) {
+                    aciertos++;
+                    detalleHTML += `<div class="review-item"><strong>Pregunta ${i}:</strong> ¡Respuesta jurídica validada con éxito!</div>`;
+                } else {
+                    detalleHTML += `<div class="review-item"><strong>Pregunta ${i}:</strong> Tu respuesta: "${document.querySelector(`input[name="q${i}"]`).value}"<br><small style="color:#776133;">Esperada: ${correctas[i]}</small></div>`;
+                }
+            }
+
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+            document.getElementById('reviewContainer').innerHTML = detalleHTML;
+        }
+
+        function mostrarPresentacionFinal() {
+            document.getElementById('resultScreen').style.display = 'none';
+            document.getElementById('finalScreen').style.display = 'block';
+            iniciarLluviaContinuaDeFlores();
+        }
+
+        function iniciarLluviaContinuaDeFlores() {
+            const flores = ['🌸', '🌺', '🌷', '🌹', '🌻', '💐', '🌼'];
+            if (flowerInterval) clearInterval(flowerInterval);
+
+            flowerInterval = setInterval(() => {
+                const flor = document.createElement('div');
+                flor.classList.add('falling-flower');
+                flor.innerText = flores[Math.floor(Math.random() * flores.length)];
+
+                // Caer solo a los costados (0%-20% izquierda o 80%-100% derecha)
+                const posicionIzquierda = Math.random() < 0.5 ? Math.random() * 20 : 80 + Math.random() * 18;
+                flor.style.left = posicionIzquierda + 'vw';
+                flor.style.animationDuration = (Math.random() * 3 + 2.5) + 's';
+
+                document.body.appendChild(flor);
+
+                setTimeout(() => flor.remove(), 5500);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
